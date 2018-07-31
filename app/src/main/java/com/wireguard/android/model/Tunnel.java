@@ -26,7 +26,7 @@ import java9.util.concurrent.CompletionStage;
 
 public class Tunnel extends BaseObservable implements Keyed<String> {
     public static final int NAME_MAX_LENGTH = 15;
-    private static final Pattern NAME_PATTERN = Pattern.compile("[a-zA-Z0-9_=+.-]{1,15}");
+    public static final Pattern NAME_PATTERN = Pattern.compile("[a-zA-Z0-9_=+.-]{1,15}");
 
     private final TunnelManager manager;
     @Nullable private Config config;

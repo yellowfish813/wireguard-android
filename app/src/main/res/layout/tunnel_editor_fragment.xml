@@ -76,8 +76,9 @@
                             android:layout_height="wrap_content"
                             android:layout_below="@+id/interface_name_label"
                             android:inputType="textNoSuggestions|textVisiblePassword"
-                            android:text="@={config.name}"
-                            app:filter="@{NameInputFilter.newInstance()}" />
+                            android:text="@={config.tunnelName.value}"
+                            app:error="@{config.tunnelName.error}"
+                            app:errorEnabled="true" />
 
                         <TextView
                             android:id="@+id/private_key_label"

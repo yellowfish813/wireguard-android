@@ -16,8 +16,10 @@ import android.os.Parcelable;
 import android.support.annotation.Nullable;
 
 import com.android.databinding.library.baseAdapters.BR;
+import com.mlykotom.valifi.fields.ValiFieldText;
 import com.wireguard.android.Application;
 import com.wireguard.android.R;
+import com.wireguard.android.model.Tunnel;
 
 import java.io.BufferedReader;
 import java.io.IOException;
@@ -106,12 +108,13 @@ public class Config {
                 return new Observable[size];
             }
         };
-        @Nullable private String name;
+        private final ValiFieldText tunnelName = new ValiFieldText().addRangeLengthValidator(1, Tunnel.NAME_MAX_LENGTH)
+                .addPatternValidator(R.string.tunnel_error_invalid_name, Tunnel.NAME_PATTERN);
         private final Interface.Observable observableInterface;
         private final ObservableList<Peer.Observable> observablePeers;
 
         public Observable(@Nullable final Config parent, @Nullable final String name) {
-            this.name = name;
+            tunnelName.setValue(name);
 
             observableInterface = new Interface.Observable(parent == null ? null : parent.interfaceSection);
             observablePeers = new ObservableArrayList<>();
@@ -122,7 +125,7 @@ public class Config {
         }
 
         private Observable(final Parcel in) {
-            name = in.readString();
+            tunnelName.setValue(in.readString());
             observableInterface = in.readParcelable(Interface.Observable.class.getClassLoader());
             observablePeers = new ObservableArrayList<>();
             in.readTypedList(observablePeers, Peer.Observable.CREATOR);
@@ -151,8 +154,15 @@ public class Config {
         }
 
         @Bindable
+        public ValiFieldText getTunnelName() {
+            return tunnelName;
+        }
+
+        // It's either this or changing method signatures across
+        // the tree so let's keep semantics as earlier and let
+        // our hacks be in one place
         public String getName() {
-            return name == null ? "" : name;
+            return tunnelName.getValue();
         }
 
         @Bindable
@@ -161,13 +171,13 @@ public class Config {
         }
 
         public void setName(final String name) {
-            this.name = name;
+            tunnelName.setValue(name);
             notifyPropertyChanged(BR.name);
         }
 
         @Override
         public void writeToParcel(final Parcel dest, final int flags) {
-            dest.writeString(name);
+            dest.writeString(tunnelName.getValue());
             dest.writeParcelable(observableInterface, flags);
             dest.writeTypedList(observablePeers);
         }

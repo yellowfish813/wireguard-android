@@ -71,6 +71,7 @@ ext {
     jsr305Version = '3.0.2'
     zxingEmbeddedVersion = '3.6.0'
     acraVersion = '5.2.0-rc2'
+    valiFiVersion = '1.3.4'
 }
 
 dependencies {
@@ -82,6 +83,7 @@ dependencies {
     implementation "com.android.support:support-annotations:$supportLibsVersion"
     implementation "com.google.code.findbugs:jsr305:$jsr305Version"
     implementation "com.journeyapps:zxing-android-embedded:$zxingEmbeddedVersion"
+    implementation "com.mlykotom:valifi:$valiFiVersion"
     implementation "net.sourceforge.streamsupport:android-retrofuture:$streamsupportVersion"
     implementation "net.sourceforge.streamsupport:android-retrostreams:$streamsupportVersion"
     implementation "ch.acra:acra-http:$acraVersion"
