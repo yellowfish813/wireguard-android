@@ -1,0 +1,6 @@
+[submodule "native/tools/libmnl"]
+	path = native/tools/libmnl
+	url = https://git.netfilter.org/libmnl
+[submodule "native/tools/wireguard"]
+	path = native/tools/wireguard
+	url = https://git.zx2c4.com/WireGuard
