@@ -6,6 +6,8 @@ This is an Android GUI for [WireGuard](https://www.wireguard.com/). It [opportun
 
 ## Building
 
+Please make sure that Go is installed on your system. Then:
+
 ```
 $ git clone https://git.zx2c4.com/wireguard-android
 $ cd wireguard-android
