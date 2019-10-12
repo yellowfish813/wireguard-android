@@ -41,27 +41,12 @@ android {
     buildTypes {
         release {
             if (keystorePropertiesFile.exists()) signingConfig signingConfigs.release
-            externalNativeBuild {
-                cmake {
-                    arguments "-DANDROID_PACKAGE_NAME=${android.defaultConfig.applicationId}"
-                }
-            }
             minifyEnabled true
             proguardFiles getDefaultProguardFile("proguard-android.txt"), "proguard-rules.pro"
         }
         debug {
             applicationIdSuffix ".debug"
             versionNameSuffix "-debug"
-            externalNativeBuild {
-                cmake {
-                    arguments "-DANDROID_PACKAGE_NAME=${android.defaultConfig.applicationId}${applicationIdSuffix}"
-                }
-            }
-        }
-    }
-    externalNativeBuild {
-        cmake {
-            path 'tools/CMakeLists.txt'
         }
     }
 }
@@ -84,6 +69,7 @@ ext {
 }
 
 dependencies {
+    implementation project(":native")
     implementation "androidx.annotation:annotation:$annotationsVersion"
     implementation "androidx.appcompat:appcompat:$appcompatVersion"
     implementation "androidx.cardview:cardview:$cardviewVersion"
