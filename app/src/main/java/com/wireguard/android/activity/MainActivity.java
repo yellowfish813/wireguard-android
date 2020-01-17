@@ -17,6 +17,7 @@ import android.view.MenuItem;
 import android.view.View;
 import android.widget.LinearLayout;
 
+import com.wireguard.android.GlobalConfig;
 import com.wireguard.android.R;
 import com.wireguard.android.fragment.TunnelDetailFragment;
 import com.wireguard.android.fragment.TunnelEditorFragment;
@@ -96,11 +97,13 @@ public class MainActivity extends BaseActivity
                 onBackPressed();
                 return true;
             case R.id.menu_action_edit:
-                getSupportFragmentManager().beginTransaction()
-                        .replace(R.id.detail_container, new TunnelEditorFragment())
-                        .setTransition(FragmentTransaction.TRANSIT_FRAGMENT_FADE)
-                        .addToBackStack(null)
-                        .commit();
+                if (GlobalConfig.ALLOW_TUNNEL_EDITING){
+                    getSupportFragmentManager().beginTransaction().replace(R.id.detail_container, new TunnelEditorFragment())
+                            .setTransition(FragmentTransaction.TRANSIT_FRAGMENT_FADE)
+                            .addToBackStack(null)
+                            .commit();
+                }
+
                 return true;
             case R.id.menu_action_save:
                 // This menu item is handled by the editor fragment.
