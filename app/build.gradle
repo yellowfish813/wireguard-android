@@ -81,6 +81,7 @@ ext {
     // gradle.properties.
     zxingEmbeddedVersion = '3.6.0'
     eddsaVersion = '0.3.0'
+    admobVersion = '18.3.0'
 }
 
 dependencies {
@@ -96,6 +97,7 @@ dependencies {
     implementation "net.sourceforge.streamsupport:android-retrofuture:$streamsupportVersion"
     implementation "net.sourceforge.streamsupport:android-retrostreams:$streamsupportVersion"
     implementation "net.i2p.crypto:eddsa:$eddsaVersion"
+    implementation "com.google.android.gms:play-services-ads:$admobVersion"
 }
 
 tasks.withType(JavaCompile) {

@@ -7,5 +7,8 @@ package com.wireguard.android;
 
 public class GlobalConfig {
     // 是否允许编辑Tunnel配置
-    public static boolean ALLOW_TUNNEL_EDITING = false;
+    public static boolean ALLOW_TUNNEL_EDITING = true;
+
+    // 是否支持admob
+    public static boolean ALLOW_ADMOB = true;
 }

@@ -24,6 +24,12 @@ import com.wireguard.android.fragment.TunnelEditorFragment;
 import com.wireguard.android.fragment.TunnelListFragment;
 import com.wireguard.android.model.Tunnel;
 
+import com.google.android.gms.ads.MobileAds;
+import com.google.android.gms.ads.initialization.InitializationStatus;
+import com.google.android.gms.ads.initialization.OnInitializationCompleteListener;
+import com.google.android.gms.ads.AdRequest;
+import com.google.android.gms.ads.AdView;
+
 /**
  * CRUD interface for WireGuard tunnels. This activity serves as the main entry point to the
  * WireGuard application, and contains several fragments for listing, viewing details of, and
@@ -35,6 +41,7 @@ public class MainActivity extends BaseActivity
     @Nullable private ActionBar actionBar;
     private boolean isTwoPaneLayout;
     @Nullable private TunnelListFragment listFragment;
+    private AdView mAdView;
 
     @Override
     public void onBackPressed() {
@@ -81,6 +88,20 @@ public class MainActivity extends BaseActivity
         final View actionBarView = findViewById(R.id.action_bar);
         if (actionBarView != null)
             actionBarView.setOnTouchListener((v, e) -> listFragment != null && listFragment.collapseActionMenu());
+
+        // Admob
+        if (GlobalConfig.ALLOW_ADMOB){
+            MobileAds.initialize(this, new OnInitializationCompleteListener() {
+                @Override
+                public void onInitializationComplete(InitializationStatus initializationStatus) {
+                }
+            });
+            mAdView = findViewById(R.id.adView);
+            mAdView.setVisibility(View.VISIBLE);
+            AdRequest adRequest = new AdRequest.Builder().build();
+            mAdView.loadAd(adRequest);
+        }
+
     }
 
     @Override
